@@ -5,8 +5,6 @@ import com.snn.recipes.model.Recipe;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.stream.Collectors;
-
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 
@@ -20,10 +18,8 @@ public class RecipeMapper {
         return RecipeDto
                 .builder()
                 .id(r.getId())
-                .name(r.getName())
                 .isVegetarian(r.isVegetarian())
                 .instruction(r.getInstruction())
-                .cookingMethod(r.getCookingMethod())
                 .numberOfServing(r.getNumberOfServing())
                 .ingredients(r.getIngredients()
                         .stream()
@@ -36,10 +32,8 @@ public class RecipeMapper {
         return Recipe
                 .builder()
                 .id(r.getId())
-                .name(r.getName())
                 .isVegetarian(r.isVegetarian())
                 .instruction(r.getInstruction())
-                .cookingMethod(r.getCookingMethod())
                 .numberOfServing(r.getNumberOfServing())
                 .ingredients(r.getIngredients()
                         .stream()

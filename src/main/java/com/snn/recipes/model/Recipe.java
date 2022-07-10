@@ -16,15 +16,13 @@ public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
     private boolean isVegetarian;
     private int numberOfServing;
 
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "recipe_id", referencedColumnName = "id")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "recipeId", referencedColumnName = "id")
     private Set<Ingredient> ingredients = new HashSet<>();
     private String instruction;
-    private String cookingMethod;
 
 
 }

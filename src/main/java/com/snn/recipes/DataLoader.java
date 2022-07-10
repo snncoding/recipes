@@ -19,39 +19,45 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Ingredient potatoes = ingredientRepository.save(new Ingredient("potatoes"));
-        Ingredient tomatoes = ingredientRepository.save(new Ingredient("tomatoes"));
-        Ingredient salt = ingredientRepository.save(new Ingredient("salt"));
-        Ingredient onion = ingredientRepository.save(new Ingredient("onion"));
-        Ingredient sugar = ingredientRepository.save(new Ingredient("sugar"));
-        Ingredient salmon = ingredientRepository.save(new Ingredient("salmon"));
-        Ingredient paprika = ingredientRepository.save(new Ingredient("paprika"));
-        Ingredient chicken = ingredientRepository.save(new Ingredient("chicken"));
-        Ingredient redChilliPowder = ingredientRepository.save(new Ingredient("red chilli powder"));
-        Ingredient oil = ingredientRepository.save(new Ingredient("oil"));
-        Ingredient garlic = ingredientRepository.save(new Ingredient("garlic"));
-        Ingredient ginger = ingredientRepository.save(new Ingredient("ginger"));
-        Ingredient egg = ingredientRepository.save(new Ingredient("egg"));
-        Ingredient pasta = ingredientRepository.save(new Ingredient("pasta"));
-        Ingredient pepper = ingredientRepository.save(new Ingredient("pepper"));
-        Ingredient mushroom = ingredientRepository.save(new Ingredient("mushroom"));
-        Ingredient cheese = ingredientRepository.save(new Ingredient("cheese"));
-        Ingredient butter = ingredientRepository.save(new Ingredient("butter"));
-        Ingredient lemon = ingredientRepository.save(new Ingredient("lemon"));
+        Ingredient potatoes = new Ingredient("potatoes");
+        Ingredient tomatoes = new Ingredient("tomatoes");
+        Ingredient salt = new Ingredient("salt");
+        Ingredient onion = new Ingredient("onion");
+        Ingredient sugar = new Ingredient("sugar");
+        Ingredient salmon = new Ingredient("salmon");
+        Ingredient paprika = new Ingredient("paprika");
+        Ingredient chicken = new Ingredient("chicken");
+        Ingredient redChilliPowder = new Ingredient("red chilli powder");
+        Ingredient oil = new Ingredient("oil");
+        Ingredient garlic = new Ingredient("garlic");
+        Ingredient ginger = new Ingredient("ginger");
+        Ingredient egg = new Ingredient("egg");
+        Ingredient pasta = new Ingredient("pasta");
+        Ingredient pepper = new Ingredient("pepper");
+        Ingredient mushroom = new Ingredient("mushroom");
+        Ingredient cheese = new Ingredient("cheese");
+        Ingredient butter = new Ingredient("butter");
+        Ingredient lemon = new Ingredient("lemon");
+
+        recipeRepository.save(new Recipe(null, true, 4,
+                Sets.newHashSet(i("chicken"), i("onion"), i("garlic"), i("garlic"), i("ginger"), i("egg"), i("salt"), i("redChilliPowder"), i("oil"), i("potatoes")), "oven"));
+
+        recipeRepository.save(new Recipe(null,  false, 6,
+                Sets.newHashSet(i("pasta"), i("oil"), i("onion"), i("pepper"), i("garlic"), i("mushroom"), i("cheese")), "grill"));
+
+        recipeRepository.save(new Recipe(null, true, 4,
+                Sets.newHashSet(i("lemon"), i("butter"), i("egg"), i("sugar")), "oven"));
+
+        recipeRepository.save(new Recipe(null, false, 8,
+                Sets.newHashSet(i("salmon"), i("salt"), i("oil"), i("pepper"), i("tomatoes"), i("paprika")), "grill"));
+
+        recipeRepository.save(new Recipe(null, true, 8,
+                Sets.newHashSet(i("potatoes"), i("salt"), i("oil"), i("lemon"), i("pepper"), i("tomatoes"), i("paprika")), "grill"));
 
 
-        recipeRepository.save(new Recipe(null, "Baked Chicken Seekh", true, 4,
-                Sets.newHashSet(chicken, onion, garlic, garlic, ginger, egg, salt, redChilliPowder, oil, potatoes), "oven", "oven"));
+    }
 
-        recipeRepository.save(new Recipe(null, "Home-Style Baked Pasta", true, 6,
-                Sets.newHashSet(pasta, oil, onion, pepper, garlic, mushroom, cheese), "oven", "oven"));
-
-        recipeRepository.save(new Recipe(null, "Lemon Tart", true, 4,
-                Sets.newHashSet(lemon, butter, egg, sugar), "oven", "oven"));
-
-        recipeRepository.save(new Recipe(null, "Wild salmon with radish & orange slaw", true, 12,
-                Sets.newHashSet(salmon, salt, oil, lemon, pepper, tomatoes, paprika), "oven", "oven"));
-
-
+    private Ingredient i(String name){
+        return new Ingredient(name);
     }
 }
