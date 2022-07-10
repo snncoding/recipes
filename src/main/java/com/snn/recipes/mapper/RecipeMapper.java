@@ -12,7 +12,7 @@ import static java.util.stream.Collectors.toSet;
 @AllArgsConstructor
 public class RecipeMapper {
 
-    public final IngredientMapper ingredientMapper;
+    private final IngredientMapper ingredientMapper;
 
     public RecipeDto toRecipeDto(Recipe r) {
         return RecipeDto

@@ -51,8 +51,8 @@ public class RecipeService {
         return recipeMapper.toRecipeDto(getById(id));
     }
 
-    public void add(RecipeDto dto) {
-        repository.save(recipeMapper.toRecipe(dto));
+    public Recipe add(RecipeDto dto) {
+        return repository.save(recipeMapper.toRecipe(dto));
     }
 
     /**
@@ -61,8 +61,9 @@ public class RecipeService {
      *
      * @param id  It is a Recipe id
      * @param dto It is a dto object of Recipe
+     * @return
      */
-    public void update(Long id, RecipeDto dto) {
+    public Recipe update(Long id, RecipeDto dto) {
         Recipe recipe = getById(id);
 
         recipe.setInstruction(dto.getInstruction());
@@ -73,7 +74,7 @@ public class RecipeService {
                 map(ingredientMapper::toIngredient).
                 collect(Collectors.toSet()));
 
-        repository.save(recipe);
+        return repository.save(recipe);
     }
 
     /**
@@ -90,26 +91,9 @@ public class RecipeService {
 
     public List<RecipeDto> search(SearchCriteriaDto criteria) {
         List<Recipe> recipes = repository.findAll(recipeSpecification.getRecipes(criteria));
+        if(recipes == null)
+            throw new EntityNotFoundException("Data not found with search criteria");
         List<RecipeDto> dtos = recipes.stream().map(recipeMapper::toRecipeDto).collect(toList());
         return dtos;
-    }
-
-    private boolean filter(Recipe recipe, SearchCriteriaDto criteria) {
-        boolean result = false;
-        if(null != criteria.getIsVegetarian()){
-            result = recipe.isVegetarian() == criteria.getIsVegetarian();
-        }
-        if(null != criteria.getNumberOfServing()){
-            result = recipe.getNumberOfServing() == criteria.getNumberOfServing();
-        }
-        if(!criteria.getIngredients().isEmpty()){
-            criteria.getIngredients().stream().filter(p-> filterByIngredient(recipe, p));
-        }
-
-        return result;
-    }
-
-    private boolean filterByIngredient(Recipe recipe, CriteriaDto p) {
-        return recipe.getIngredients().contains(new Ingredient(p.getCriteria())) == p.isIncluded();
     }
 }
