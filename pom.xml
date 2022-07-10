@@ -79,6 +79,13 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <excludes>
+                        <source>11</source>
+                        <target>11</target>
+                        <testSource>11</testSource>
+                        <testTarget>11</testTarget>
+                        <showDeprecation>true</showDeprecation>
+                        <compilerArgument>-Xlint:unchecked</compilerArgument>
+
                         <exclude>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
