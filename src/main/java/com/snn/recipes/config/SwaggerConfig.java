@@ -22,7 +22,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("Recipes API")
                 .description("Code Assignment About Recipes Api Init")
-                .contact(new Contact("", "", "sinandobur@gmail.com")).license("Snn License")
+                .contact(new Contact("", "", "sinandobur@gmail.com")).license("")
                 .licenseUrl("sinandobur@gmail.com").version("1.0").build();
     }
 }
