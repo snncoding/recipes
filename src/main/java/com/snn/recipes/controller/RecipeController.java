@@ -6,6 +6,7 @@ import com.snn.recipes.service.RecipeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,8 +35,9 @@ public class RecipeController {
 
     @ApiOperation("Saves a recipe")
     @PostMapping
-    public void add(@Valid @RequestBody RecipeDto dto){
+    public ResponseEntity add(@Valid @RequestBody RecipeDto dto){
         service.add(dto);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @ApiOperation("Updates a recipe")
