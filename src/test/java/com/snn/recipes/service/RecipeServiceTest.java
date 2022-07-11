@@ -49,11 +49,6 @@ class RecipeServiceTest {
                 new Recipe(2L, true, 2, getIngredients("pasta,water,salt,pepper,onion"), "boiled")
         );
 
-//        IngredientMapper ingredientMapper = new IngredientMapper();
-//        recipeMapper = new RecipeMapper(ingredientMapper);
-//
-//        RecipeSpecification recipeSpecification = new RecipeSpecification();
-//        recipeService = new RecipeService(recipeRepository, recipeMapper, ingredientMapper, recipeSpecification);
     }
 
     /**

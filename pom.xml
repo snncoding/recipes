@@ -78,12 +78,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                    <testSource>11</testSource>
-                    <testTarget>11</testTarget>
-                    <showDeprecation>true</showDeprecation>
-                    <compilerArgument>-Xlint:unchecked</compilerArgument>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>

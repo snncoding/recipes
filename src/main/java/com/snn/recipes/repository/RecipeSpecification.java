@@ -33,7 +33,7 @@ public class RecipeSpecification {
             if (dto.getNumberOfServing() != null) {
                 predicates.add(cBuilder.equal(root.get("numberOfServing"), dto.getNumberOfServing()));
             }
-            if (!dto.getIngredients().isEmpty()) {
+            if (dto.getIngredients() != null && !dto.getIngredients().isEmpty()) {
                 for (CriteriaDto crtDto : dto.getIngredients()) {
                     Subquery<Ingredient> subquery = query.subquery(Ingredient.class);
                     Root<Ingredient> subqueryRoot = subquery.from(Ingredient.class);
@@ -51,7 +51,7 @@ public class RecipeSpecification {
                 }
             }
 
-            if (!dto.getInstructions().isEmpty()) {
+            if (dto.getInstructions() != null && !dto.getInstructions().isEmpty()) {
                 for (CriteriaDto crtDto : dto.getInstructions()) {
                     if (crtDto.isIncluded()) {
                         predicates.add(cBuilder.like(root.get("instruction"), "%" + crtDto.getCriteria() + "%"));
