@@ -1,11 +1,11 @@
 # recipe Rest Api 
 
--Unit test coverage is over 90%.
--Used Mockito
--Validation is applied
--Dynamic search created.
--Applied CI/CD
--Also applied auto deploy to heroku but does not succeed 
+- Unit test coverage is over 90%.
+- Used Mockito
+- Validation is applied
+- Dynamic search created.
+- Applied CI/CD
+- Also applied auto deploy to heroku but does not succeed 
 
 ----------------------------
 ## Spring Boot
