@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.List;
 
 @Data
@@ -16,6 +14,8 @@ public class RecipeDto {
 
     private Long id;
     private boolean isVegetarian;
+    @Min(1)
+    @Max(10)
     private int numberOfServing;
     @NotEmpty(message = "Recipe ingredients can not be empty")
     private List<IngredientDto> ingredients;
