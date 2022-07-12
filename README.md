@@ -1,4 +1,51 @@
-# recipe Rest Api 
+# Favoruite Recipe Rest Api 
+
+----------------------------
+### Request examples
+
+----------------------------
+- All vegetarian recipes
+```JSON
+{
+  "isVegetarian": true
+}
+```
+
+- Recipes that can serve 4 persons and have “potatoes” as an ingredient
+```JSON
+{
+  "ingredients": [
+    {
+      "criteria": "potatoes",
+      "included": true
+    }
+  ],
+  "numberOfServing": 4
+}
+```
+
+- Recipes without “salmon” as an ingredient that has “oven” in the instructions.
+```JSON
+{
+  "ingredients": [
+    {
+      "criteria": "salmon",
+      "included": false
+    }
+  ],
+  "instructions": [
+    {
+      "criteria": "oven",
+      "included": true
+    }
+  ]
+}
+```
+
+----------------------------
+### Features
+
+----------------------------
 
 - Unit test coverage is over 90%.
 - Used Mockito
@@ -9,8 +56,10 @@
 
 ----------------------------
 ## Spring Boot
+
 ---------------------------
 ### Tech Info
+
 
 - Java 11
 - Spring Boot
