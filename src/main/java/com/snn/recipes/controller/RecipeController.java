@@ -27,7 +27,7 @@ public class RecipeController {
         return ResponseEntity.ok(service.getAll());
     }
 
-    @ApiOperation("Gets a book by its id")
+    @ApiOperation("Gets a recipe by its id")
     @GetMapping("/{recipeId}")
     public RecipeDto fetch(@PathVariable Long recipeId){
         return service.fetch(recipeId);
