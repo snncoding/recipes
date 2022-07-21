@@ -30,7 +30,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     public @ResponseBody ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException ex) {
         log.error(ex.getMessage());
         ErrorResponse error = new ErrorResponse(NOT_FOUND, ex.getMessage() , null);
-        return new ResponseEntity(error, NOT_FOUND);
+        return new ResponseEntity<>(error, NOT_FOUND);
     }
 
     @ExceptionHandler(Exception.class)
@@ -40,7 +40,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
         ErrorResponse error = new ErrorResponse(INTERNAL_SERVER_ERROR,"Server Error", details);
-        return new ResponseEntity(error, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 
@@ -53,7 +53,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
             details.add(error.getDefaultMessage());
         }
         ErrorResponse error = new ErrorResponse(BAD_REQUEST,"Validation Failed", details);
-        return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
 }

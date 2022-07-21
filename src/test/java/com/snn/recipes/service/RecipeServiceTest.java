@@ -41,6 +41,7 @@ class RecipeServiceTest {
 
     @Autowired
     private RecipeMapper recipeMapper;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -53,6 +54,7 @@ class RecipeServiceTest {
 
     /**
      * Creates a Set of Ingredient for test
+     *
      * @param strIngredients String type
      * @return
      */
@@ -81,10 +83,10 @@ class RecipeServiceTest {
     }
 
     @Test
-    void itShouldThrowEntityNotFoundException_getById(){
+    void itShouldThrowEntityNotFoundException_getById() {
         when(recipeRepository.findById(any())).thenThrow(EntityNotFoundException.class);
 
-        assertThrows(EntityNotFoundException.class,()-> recipeService.getById(3L), "recipeService.getById must throw EntityNotFoundException");
+        assertThrows(EntityNotFoundException.class, () -> recipeService.getById(3L), "recipeService.getById must throw EntityNotFoundException");
     }
 
     @Test
@@ -104,7 +106,7 @@ class RecipeServiceTest {
         Recipe recipe = recipeService.add(dto);
 
         //equals method already had been written
-        assertEquals(recipe, recipes.get(0));
+        assertEquals(recipe, recipes.get(0), "");
     }
 
     @Test
@@ -121,7 +123,7 @@ class RecipeServiceTest {
     void itShouldThrowEntityNotFoundException_update() {
         when(recipeRepository.findById(any())).thenThrow(EntityNotFoundException.class);
 
-        assertThrows(EntityNotFoundException.class,()->recipeService.update(2L, recipeMapper.toRecipeDto(recipes.get(1))));
+        assertThrows(EntityNotFoundException.class, () -> recipeService.update(2L, recipeMapper.toRecipeDto(recipes.get(1))));
 
     }
 
@@ -145,7 +147,7 @@ class RecipeServiceTest {
         List<RecipeDto> list = recipeService.search(dto);
 
         assertTrue(list.get(0).isVegetarian(), "After searching, result must return all vegetarian recipe");
-        assertEquals(list.get(0).getId(), 2, "After searching, result must return valid id");
+        assertEquals(2, list.get(0).getId(), "After searching, result must return valid id");
     }
 
     @Test
@@ -157,6 +159,6 @@ class RecipeServiceTest {
         List<RecipeDto> list = recipeService.search(dto);
 
         assertFalse(list.get(0).isVegetarian(), "After searching, result must return non-vegetarian recipe");
-        assertEquals(list.get(0).getId(), 1, "After searching, result must return valid id for non-vegetarian recipe");
+        assertEquals(1, list.get(0).getId(), "After searching, result must return valid id for non-vegetarian recipe");
     }
 }

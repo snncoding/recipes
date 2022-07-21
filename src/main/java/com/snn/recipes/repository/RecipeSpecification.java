@@ -37,7 +37,6 @@ public class RecipeSpecification {
                 for (CriteriaDto crtDto : dto.getIngredients()) {
                     Subquery<Ingredient> subquery = query.subquery(Ingredient.class);
                     Root<Ingredient> subqueryRoot = subquery.from(Ingredient.class);
-                    //Join<Recipe, Ingredient> ingredients = root.join("ingredients");
 
                     Predicate subPredicateName = cBuilder.equal(subqueryRoot.get("name"), crtDto.getCriteria());
                     Predicate subPredicateRecipeId = cBuilder.equal(subqueryRoot.get("recipeId"), root.get("id"));
