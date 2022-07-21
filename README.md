@@ -2,7 +2,10 @@
 
 ----------------------------
 ### Request examples
+You can make sample queries with swagger or Postman using the following JSON calls.
 
+URL : .../api/recipe/search 
+METHOD : POST
 ----------------------------
 - All vegetarian recipes
 ```JSON
