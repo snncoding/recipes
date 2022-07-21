@@ -35,9 +35,9 @@ public class RecipeController {
 
     @ApiOperation("Saves a recipe")
     @PostMapping
-    public ResponseEntity add(@Valid @RequestBody RecipeDto dto){
+    public ResponseEntity<Object> add(@Valid @RequestBody RecipeDto dto){
         service.add(dto);
-        return new ResponseEntity(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @ApiOperation("Updates a recipe")

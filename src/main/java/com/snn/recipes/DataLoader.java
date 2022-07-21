@@ -19,7 +19,7 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Ingredient potatoes = new Ingredient("potatoes");
+        /*Ingredient potatoes = new Ingredient("potatoes");
         Ingredient tomatoes = new Ingredient("tomatoes");
         Ingredient salt = new Ingredient("salt");
         Ingredient onion = new Ingredient("onion");
@@ -37,7 +37,7 @@ public class DataLoader implements CommandLineRunner {
         Ingredient mushroom = new Ingredient("mushroom");
         Ingredient cheese = new Ingredient("cheese");
         Ingredient butter = new Ingredient("butter");
-        Ingredient lemon = new Ingredient("lemon");
+        Ingredient lemon = new Ingredient("lemon");*/
 
         recipeRepository.save(new Recipe(null, true, 4,
                 Sets.newHashSet(i("chicken"), i("onion"), i("garlic"), i("garlic"), i("ginger"), i("egg"), i("salt"), i("redChilliPowder"), i("oil"), i("potatoes")), "oven"));

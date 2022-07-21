@@ -2,6 +2,7 @@ package com.snn.recipes.controller;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.snn.recipes.dto.SearchCriteriaDto;
 import com.snn.recipes.mapper.RecipeMapper;
 import com.snn.recipes.model.Ingredient;
 import com.snn.recipes.model.Recipe;
@@ -79,13 +80,12 @@ class RecipeControllerTest {
 
         response.andExpect(status().isOk())
                 .andDo(print())
-                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()",
                         is(recipes.size())));
     }
 
     @Test
-    public void itShouldReturnById_fetch() throws Exception {
+    void itShouldReturnById_fetch() throws Exception {
         given(service.fetch(1L)).willReturn(recipeMapper.toRecipeDto(recipes.get(0)));
 
         ResultActions resultActions = mockMvc.perform(get("/api/recipe/" + recipes.get(0).getId()));
@@ -97,7 +97,7 @@ class RecipeControllerTest {
     }
 
     @Test
-    public void itShouldThrowNotFound_fetch() throws Exception {
+    void itShouldThrowNotFound_fetch() throws Exception {
         given(service.fetch(1L)).willThrow(EntityNotFoundException.class);
 
         ResultActions resultActions = mockMvc.perform(get("/api/recipe/" + recipes.get(0).getId()));
@@ -106,7 +106,7 @@ class RecipeControllerTest {
     }
 
     @Test
-    public void itShouldResponseCreatedHttpStatus_add() throws Exception {
+    void itShouldResponseCreatedHttpStatus_add() throws Exception {
         given(service.add(recipeMapper.toRecipeDto(recipes.get(0)))).willReturn(recipes.get(0));
 
         ResultActions resultActions = mockMvc.perform(post("/api/recipe")
@@ -116,14 +116,14 @@ class RecipeControllerTest {
         resultActions.andExpect(status().isCreated());
     }
 
-    public byte[] toJson(Object object) throws IOException {
+    byte[] toJson(Object object) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         return mapper.writeValueAsBytes(object);
     }
 
     @Test
-    public void itShouldReturnOkStatus_update() throws Exception {
+    void itShouldReturnOkStatus_update() throws Exception {
         given(service.update(1L, recipeMapper.toRecipeDto(recipes.get(0)))).willReturn(recipes.get(0));
 
         ResultActions resultActions = mockMvc.perform(put("/api/recipe/" + recipes.get(0).getId())
@@ -134,7 +134,7 @@ class RecipeControllerTest {
     }
 
     @Test
-    public void itShouldReturnNotFoundStatus_update() throws Exception {
+    void itShouldReturnNotFoundStatus_update() throws Exception {
         given(service.update(1L, recipeMapper.toRecipeDto(recipes.get(0)))).willThrow(EntityNotFoundException.class);
 
         ResultActions resultActions = mockMvc.perform(put("/api/recipe/" + recipes.get(0).getId())
@@ -145,7 +145,7 @@ class RecipeControllerTest {
     }
 
     @Test
-    public void itShouldReturnOkStatus_delete() throws Exception {
+    void itShouldReturnOkStatus_delete() throws Exception {
         doNothing().when(service).delete(1L);
 
         ResultActions resultActions = mockMvc.perform(delete("/api/recipe/1")
@@ -154,7 +154,7 @@ class RecipeControllerTest {
     }
 
     @Test
-    public void itShouldThrowNotFound_delete() throws Exception {
+    void itShouldThrowNotFound_delete() throws Exception {
         Mockito.doThrow(EntityNotFoundException.class).when(service).delete(1L);
 
         ResultActions resultActions = mockMvc.perform(delete("/api/recipe/1")
@@ -163,7 +163,17 @@ class RecipeControllerTest {
     }
 
     @Test
-    public void search() {
+    void search() throws Exception {
+        given(service.search(SearchCriteriaDto.builder().isVegetarian(false).build())).
+                willReturn(List.of(recipeMapper.toRecipeDto(recipes.get(0))));
 
+        ResultActions resultActions = mockMvc.perform(post("/api/recipe/search")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(toJson(SearchCriteriaDto.builder().isVegetarian(false).build())));
+
+        resultActions.andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("$.size()", is(1)))
+                .andExpect(jsonPath("$[0].id", is(1)));
     }
 }

@@ -1,11 +1,9 @@
 package com.snn.recipes.service;
 
-import com.snn.recipes.dto.CriteriaDto;
 import com.snn.recipes.dto.RecipeDto;
 import com.snn.recipes.dto.SearchCriteriaDto;
 import com.snn.recipes.mapper.IngredientMapper;
 import com.snn.recipes.mapper.RecipeMapper;
-import com.snn.recipes.model.Ingredient;
 import com.snn.recipes.model.Recipe;
 import com.snn.recipes.repository.RecipeRepository;
 import com.snn.recipes.repository.RecipeSpecification;
@@ -34,8 +32,7 @@ public class RecipeService {
      */
     public List<RecipeDto> getAll() {
         List<Recipe> list = repository.findAll();
-        List<RecipeDto> dtoList = list.stream().map(recipeMapper::toRecipeDto).collect(toList());
-        return dtoList;
+        return list.stream().map(recipeMapper::toRecipeDto).collect(toList());
     }
 
     /**
@@ -84,16 +81,14 @@ public class RecipeService {
      * @param id
      */
     public void delete(Long id) {
-        Recipe recipe = getById(id);
+        //Removed unused vaiable
+        getById(id);
 
         repository.deleteById(id);
     }
 
     public List<RecipeDto> search(SearchCriteriaDto criteria) {
         List<Recipe> recipes = repository.findAll(recipeSpecification.getRecipes(criteria));
-        if(recipes == null)
-            throw new EntityNotFoundException("Data not found with search criteria");
-        List<RecipeDto> dtos = recipes.stream().map(recipeMapper::toRecipeDto).collect(toList());
-        return dtos;
+        return recipes.stream().map(recipeMapper::toRecipeDto).collect(toList());
     }
 }
