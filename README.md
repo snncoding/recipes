@@ -1,4 +1,5 @@
-https://dev.azure.com/snnd/recipes/_apis/build/status/snncoding.recipes?branchName=main
+[![Build Status](https://dev.azure.com/snnd/recipes/_apis/build/status/snncoding.recipes?branchName=main)](https://dev.azure.com/snnd/recipes/_build/latest?definitionId=2&branchName=main)
+
 # Favoruite Recipe Rest Api 
 
 ----------------------------
