@@ -54,7 +54,8 @@ public class DataLoader implements CommandLineRunner {
         recipeRepository.save(new Recipe(null, true, 8,
                 Sets.newHashSet(i("potatoes"), i("salt"), i("oil"), i("lemon"), i("pepper"), i("tomatoes"), i("paprika")), "grill"));
 
-
+        recipeRepository.save(new Recipe(null, true, 8,
+                Sets.newHashSet(i("potatoes"), i("salt"), i("oil"), i("lemon"), i("pepper"), i("mushroom"), i("paprika")), "oven"));
     }
 
     private Ingredient i(String name){
